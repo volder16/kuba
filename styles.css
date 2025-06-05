@@ -1,12 +1,7 @@
-/* Імпорт шрифту Inter вже є в HTML через <link>, але якщо ви вирішите його прибрати звідти, можна додати сюди:
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-*/
-
 body {
     font-family: 'Inter', sans-serif;
     background-color: #0a0a0a; /* Дуже темний фон */
     color: #e0e0e0;
-    /* overflow-x-hidden; вже застосовано через Tailwind в HTML, можна прибрати звідси, якщо він там є */
 }
 
 /* Стилі для логотипу KUBA */
@@ -24,12 +19,6 @@ body {
     }
 }
 
-.animated-gradient-text {
-    background-size: 200% auto;
-    animation: gradient-animation 5s ease infinite;
-    /* text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 - ці класи Tailwind вже застосовані в HTML */
-}
-
 @keyframes pulse-shadow {
     0% {
         box-shadow: 0 15px 30px -8px rgba(0, 0, 0, 0.4);
@@ -44,26 +33,27 @@ body {
     }
 }
 
-
 .pulsating-shadow-small {
     animation: pulse-shadow 4s ease-in-out infinite;
 }
-.logo {
-    width: 50px;
-    height: auto;
-}
+
+/* Стилі для анімованого логотипу з маскою */
 .animated-logo {
+    width: 100%;
+    height: 100%;
+    /* Градієнт, який буде переливатися */
     background: linear-gradient(270deg, #a78bfa, #ec4899, #ef4444);
-    background-size: 600% 600%;
+    background-size: 600% 600%; /* Збільшений розмір для анімації */
+    animation: gradientShift 6s ease infinite; /* Анімація руху градієнта */
+    /* Застосування зображення логотипу як маски */
     -webkit-mask-image: url('img/KUBA_W (2).png');
     -webkit-mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    -webkit-mask-position: center;
-    mask-image: url('img/KUBA_W(2).png');
+    -webkit-mask-size: contain; /* Масштабуємо маску, щоб вона помістилася */
+    -webkit-mask-position: center; /* Центруємо маску */
+    mask-image: url('img/KUBA_W(2).png'); /* Для інших браузерів */
     mask-repeat: no-repeat;
     mask-size: contain;
     mask-position: center;
-    animation: gradientShift 6s ease infinite;
 }
 
 @keyframes gradientShift {
@@ -79,14 +69,6 @@ body {
         background-position: 0% 50%;
     }
 }
-
-.animated-gradient-background {
-    background: linear-gradient(45deg, #a78bfa, #f472b6, #ff007f, #f472b6, #a78bfa); /* Градієнт для фону */
-    background-size: 400% auto; /* Збільшуємо розмір градієнта для плавного руху */
-    animation: gradient-animation 5s ease infinite; /* Плавна нескінченна анімація */
-}
-
-
 
 /* Стилі для фонового відео/зображення в Hero Section */
 .hero-background {
@@ -120,11 +102,6 @@ body {
     }
 
 /* Стилі для кнопок */
-/* Клас btn-primary використовує @apply з Tailwind, тому його слід залишити в <style> всередині HTML,
-   або переписати ці стилі на чистий CSS тут, якщо ви не хочете використовувати @apply в окремому CSS файлі.
-   Tailwind JIT компілятор не оброблятиме @apply в зовнішніх CSS файлах без додаткової конфігурації.
-   Для простоти, я залишу його в HTML, але якщо ви хочете перенести, ось приклад як це могло б виглядати:
-*/
 .btn-primary {
     display: inline-flex;
     align-items: center;
@@ -154,68 +131,6 @@ body {
         box-shadow: 0 10px 20px rgba(167, 139, 250, 0.4);
     }
 
-
-/* Стилі для модального вікна форми */
-.modal {
-    display: none; /* Приховано за замовчуванням */
-    position: fixed; /* Позиціонування над усім */
-    z-index: 1000; /* Вищий індекс, щоб бути над іншими елементами */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto; /* Дозволяє прокрутку, якщо вміст завеликий */
-    background-color: rgba(0, 0, 0, 0.8); /* Напівпрозорий чорний фон */
-    backdrop-filter: blur(8px); /* Ефект розмиття */
-    -webkit-backdrop-filter: blur(8px); /* Для сумісності з Safari */
-    /* justify-content та align-items вже застосовані через Tailwind в HTML (клас flex) */
-}
-
-    .modal.flex { /* Додано для того, щоб display: flex працював, коли модальне вікно видиме */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-
-.modal-content {
-    background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
-    margin: auto;
-    padding: 32px;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
-    max-width: 90%;
-    width: 500px;
-    position: relative;
-    transform: scale(0.9);
-    opacity: 0;
-    animation: fadeInScale 0.3s ease-out forwards;
-}
-
-@keyframes fadeInScale {
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-.close-button {
-    color: #aaa;
-    position: absolute;
-    top: 16px;
-    right: 20px;
-    font-size: 32px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: color 0.2s ease-in-out;
-}
-
-    .close-button:hover,
-    .close-button:focus {
-        color: #f472b6;
-        text-decoration: none;
-    }
-
 /* Стилі для вбудованих відео - Горизонтальні */
 .video-container-horizontal {
     position: relative;
@@ -229,8 +144,7 @@ body {
 /* Стилі для вбудованих відео - Вертикальні */
 .video-container-vertical {
     position: relative;
-    padding-bottom: 177.77%; /* 9:16 Aspect Ratio (16/9 * 100% / (9/16)) -> (16/9) * (16/9) * 100% -> (256/81)*100%  Ні, просто 16/9 * 100% для контейнера 9:16. padding-bottom: calc(16 / 9 * 100%); */
-    /* Правильно: для 9:16 (ширина:висота), padding-bottom = (16/9)*100% = 177.77% */
+    padding-bottom: 177.77%; /* 9:16 Aspect Ratio (16/9 * 100%) */
     height: 0;
     overflow: hidden;
     border-radius: 12px;
@@ -254,43 +168,3 @@ body {
         height: 100%;
         border: 0; /* Додано для iframe, щоб прибрати стандартну рамку */
     }
-
-/* Стилі для поля вводу та текстової області в модальному вікні */
-#briefModal input[type="text"],
-#briefModal input[type="email"],
-#briefModal input[type="tel"],
-#briefModal select,
-#briefModal textarea {
-    /* Tailwind класи вже застосовані в HTML.
-       Якщо ви хочете повністю відокремити, ви можете додати ці стилі тут:
-       width: 100%;
-       padding: 0.75rem; // p-3
-       background-color: #374151; // bg-gray-700
-       border: 1px solid #4B5563; // border border-gray-600
-       border-radius: 0.5rem; // rounded-lg
-       color: white;
-       outline: none;
-       transition: all 0.2s ease-in-out;
-    */
-}
-
-    #briefModal input[type="text"]:focus,
-    #briefModal input[type="email"]:focus,
-    #briefModal input[type="tel"]:focus,
-    #briefModal select:focus,
-    #briefModal textarea:focus {
-        /* Tailwind класи focus:ring-2 focus:ring-... focus:border-transparent вже застосовані.
-       Приклад для одного:
-       border-color: transparent;
-       box-shadow: 0 0 0 2px #a78bfa; // ring-2 ring-purple-500
-    */
-    }
-
-/* Повідомлення про успішну відправку */
-#successMessage.hidden {
-    display: none;
-}
-
-#successMessage {
-    /* Tailwind класи вже застосовані в HTML */
-}
