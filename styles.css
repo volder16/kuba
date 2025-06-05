@@ -44,6 +44,11 @@ body {
     }
 }
 
+.logo {
+    width: 50px;
+    height: auto;
+}
+
 .pulsating-shadow-small {
     animation: pulse-shadow 4s ease-in-out infinite;
 }
