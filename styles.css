@@ -1,0 +1,256 @@
+/* Імпорт шрифту Inter вже є в HTML через <link>, але якщо ви вирішите його прибрати звідти, можна додати сюди:
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+*/
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #0a0a0a; /* Дуже темний фон */
+    color: #e0e0e0;
+    /* overflow-x-hidden; вже застосовано через Tailwind в HTML, можна прибрати звідси, якщо він там є */
+}
+
+/* Стилі для логотипу KUBA */
+@keyframes gradient-animation {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.animated-gradient-text {
+    background-size: 200% auto;
+    animation: gradient-animation 5s ease infinite;
+    /* text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 - ці класи Tailwind вже застосовані в HTML */
+}
+
+@keyframes pulse-shadow {
+    0% {
+        box-shadow: 0 15px 30px -8px rgba(0, 0, 0, 0.4);
+    }
+
+    50% {
+        box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6);
+    }
+
+    100% {
+        box-shadow: 0 15px 30px -8px rgba(0, 0, 0, 0.4);
+    }
+}
+
+.pulsating-shadow-small {
+    animation: pulse-shadow 4s ease-in-out infinite;
+}
+
+/* Стилі для фонового відео/зображення в Hero Section */
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    filter: brightness(0.4); /* затемнення */
+}
+
+/* Стилі для скролінгу команди */
+.team-scroll-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.team-scroll-container::-webkit-scrollbar-track {
+    background: #2a2a2a;
+    border-radius: 10px;
+}
+
+.team-scroll-container::-webkit-scrollbar-thumb {
+    background: linear-gradient(to right, #a78bfa, #f472b6); /* Градієнтний скролбар */
+    border-radius: 10px;
+}
+
+    .team-scroll-container::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(to right, #8b5cf6, #ec4899);
+    }
+
+/* Стилі для кнопок */
+/* Клас btn-primary використовує @apply з Tailwind, тому його слід залишити в <style> всередині HTML,
+   або переписати ці стилі на чистий CSS тут, якщо ви не хочете використовувати @apply в окремому CSS файлі.
+   Tailwind JIT компілятор не оброблятиме @apply в зовнішніх CSS файлах без додаткової конфігурації.
+   Для простоти, я залишу його в HTML, але якщо ви хочете перенести, ось приклад як це могло б виглядати:
+*/
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 2rem; /* px-8 */
+    padding-right: 2rem; /* px-8 */
+    padding-top: 0.75rem; /* py-3 */
+    padding-bottom: 0.75rem; /* py-3 */
+    font-size: 1.125rem; /* text-lg */
+    font-weight: 500; /* font-medium */
+    color: white;
+    border-radius: 9999px; /* rounded-full */
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05); /* shadow-lg */
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+    background: linear-gradient(45deg, #a78bfa, #f472b6); /* Градієнтна кнопка */
+    background-size: 200% auto;
+    animation: gradient-animation 3s ease infinite; /* Використовує існуючу анімацію */
+    border: none;
+    text-decoration: none; /* Додано для посилань, що виглядають як кнопки */
+    cursor: pointer; /* Додано для кращої інтерактивності */
+}
+
+    .btn-primary:hover {
+        background-position: right center;
+        box-shadow: 0 10px 20px rgba(167, 139, 250, 0.4);
+    }
+
+
+/* Стилі для модального вікна форми */
+.modal {
+    display: none; /* Приховано за замовчуванням */
+    position: fixed; /* Позиціонування над усім */
+    z-index: 1000; /* Вищий індекс, щоб бути над іншими елементами */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Дозволяє прокрутку, якщо вміст завеликий */
+    background-color: rgba(0, 0, 0, 0.8); /* Напівпрозорий чорний фон */
+    backdrop-filter: blur(8px); /* Ефект розмиття */
+    -webkit-backdrop-filter: blur(8px); /* Для сумісності з Safari */
+    /* justify-content та align-items вже застосовані через Tailwind в HTML (клас flex) */
+}
+
+    .modal.flex { /* Додано для того, щоб display: flex працював, коли модальне вікно видиме */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+.modal-content {
+    background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+    margin: auto;
+    padding: 32px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+    max-width: 90%;
+    width: 500px;
+    position: relative;
+    transform: scale(0.9);
+    opacity: 0;
+    animation: fadeInScale 0.3s ease-out forwards;
+}
+
+@keyframes fadeInScale {
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.close-button {
+    color: #aaa;
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    font-size: 32px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+}
+
+    .close-button:hover,
+    .close-button:focus {
+        color: #f472b6;
+        text-decoration: none;
+    }
+
+/* Стилі для вбудованих відео - Горизонтальні */
+.video-container-horizontal {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+    overflow: hidden;
+    border-radius: 12px; /* Заокруглені кути для відео */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease-in-out;
+}
+/* Стилі для вбудованих відео - Вертикальні */
+.video-container-vertical {
+    position: relative;
+    padding-bottom: 177.77%; /* 9:16 Aspect Ratio (16/9 * 100% / (9/16)) -> (16/9) * (16/9) * 100% -> (256/81)*100%  Ні, просто 16/9 * 100% для контейнера 9:16. padding-bottom: calc(16 / 9 * 100%); */
+    /* Правильно: для 9:16 (ширина:висота), padding-bottom = (16/9)*100% = 177.77% */
+    height: 0;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease-in-out;
+}
+
+    .video-container-horizontal:hover,
+    .video-container-vertical:hover {
+        transform: scale(1.02);
+    }
+
+    .video-container-horizontal iframe,
+    .video-container-horizontal video,
+    .video-container-vertical iframe,
+    .video-container-vertical video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 0; /* Додано для iframe, щоб прибрати стандартну рамку */
+    }
+
+/* Стилі для поля вводу та текстової області в модальному вікні */
+#briefModal input[type="text"],
+#briefModal input[type="email"],
+#briefModal input[type="tel"],
+#briefModal select,
+#briefModal textarea {
+    /* Tailwind класи вже застосовані в HTML.
+       Якщо ви хочете повністю відокремити, ви можете додати ці стилі тут:
+       width: 100%;
+       padding: 0.75rem; // p-3
+       background-color: #374151; // bg-gray-700
+       border: 1px solid #4B5563; // border border-gray-600
+       border-radius: 0.5rem; // rounded-lg
+       color: white;
+       outline: none;
+       transition: all 0.2s ease-in-out;
+    */
+}
+
+    #briefModal input[type="text"]:focus,
+    #briefModal input[type="email"]:focus,
+    #briefModal input[type="tel"]:focus,
+    #briefModal select:focus,
+    #briefModal textarea:focus {
+        /* Tailwind класи focus:ring-2 focus:ring-... focus:border-transparent вже застосовані.
+       Приклад для одного:
+       border-color: transparent;
+       box-shadow: 0 0 0 2px #a78bfa; // ring-2 ring-purple-500
+    */
+    }
+
+/* Повідомлення про успішну відправку */
+#successMessage.hidden {
+    display: none;
+}
+
+#successMessage {
+    /* Tailwind класи вже застосовані в HTML */
+}
