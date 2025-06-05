@@ -153,8 +153,8 @@
                 text-decoration: none;
             }
 
-        /* Стилі для вбудованих відео */
-        .video-container {
+        /* Стилі для вбудованих відео - Горизонтальні */
+        .video-container-horizontal {
             position: relative;
             padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
             height: 0;
@@ -163,13 +163,26 @@
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
             transition: transform 0.3s ease-in-out;
         }
+        /* Стилі для вбудованих відео - Вертикальні */
+        .video-container-vertical {
+            position: relative;
+            padding-bottom: 177.77%; /* 9:16 Aspect Ratio (16/9 * 100%) */
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease-in-out;
+        }
 
-            .video-container:hover {
+            .video-container-horizontal:hover,
+            .video-container-vertical:hover {
                 transform: scale(1.02);
             }
 
-            .video-container iframe,
-            .video-container video {
+            .video-container-horizontal iframe,
+            .video-container-horizontal video,
+            .video-container-vertical iframe,
+            .video-container-vertical video {
                 position: absolute;
                 top: 0;
                 left: 0;
@@ -282,35 +295,32 @@
                 Ось деякі з наших найкращих робіт, що демонструють різноманітність та якість наших послуг. Ви можете переглянути їх прямо тут.
             </p>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Відео 1 (YouTube Embed) -->
-                <div class="video-container">
-                    <iframe title="vimeo-player" src="https://player.vimeo.com/video/1060055368?h=c8e9ae0828" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+                <!-- Горизонтальні Відео -->
+                <div class="video-container-horizontal">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
-                <!-- Відео 2 (Vimeo Embed) -->
-                <div class="video-container">
-                    <iframe title="vimeo-player" src="https://player.vimeo.com/video/1090932265?h=4329166e6e" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+                <div class="video-container-horizontal">
+                    <iframe src="https://player.vimeo.com/video/84107106?autoplay=0&loop=0&autopause=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
                 </div>
-                <!-- Відео 3 (Placeholder Video Tag) -->
-                <div class="video-container">
-                    <video controls muted poster="https://placehold.co/640x360/2d2d2d/ffffff?text=Ваше+Відео+3">
+                <div class="video-container-horizontal">
+                    <video controls muted poster="https://placehold.co/640x360/2d2d2d/ffffff?text=Горизонтальне+Відео+3">
                         <source src="https://assets.mixkit.co/videos/preview/mixkit-beautiful-sunset-over-a-field-3788-large.mp4" type="video/mp4">
                         Ваш браузер не підтримує тег відео.
                     </video>
                 </div>
-                <!-- Відео 4 -->
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/A0h5q27fU2Q?controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <!-- Вертикальні Відео -->
+                <div class="video-container-vertical">
+                    <iframe title="vimeo-player" src="https://player.vimeo.com/video/1090932265?h=4329166e6e" width="640" height="360" frameborder="0" allowfullscreen></iframe>
                 </div>
-                <!-- Відео 5 -->
-                <div class="video-container">
-                    <iframe src="https://player.vimeo.com/video/22439234?autoplay=0&loop=0&autopause=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                </div>
-                <!-- Відео 6 -->
-                <div class="video-container">
-                    <video controls muted poster="https://placehold.co/640x360/2d2d2d/ffffff?text=Ваше+Відео+6">
-                        <source src="https://assets.mixkit.co/videos/preview/mixkit-waves-breaking-on-the-beach-7049-large.mp4" type="video/mp4">
+                <div class="video-container-vertical">
+                    <video controls muted poster="https://placehold.co/360x640/2d2d2d/ffffff?text=Вертикальне+Відео+2">
+                        <source src="https://assets.mixkit.co/videos/preview/mixkit-woman-walking-through-a-city-5085-large.mp4" type="video/mp4">
                         Ваш браузер не підтримує тег відео.
                     </video>
+                </div>
+                <div class="video-container-vertical">
+                    <iframe src="https://www.youtube.com/embed/gWzP9-aQ39I?controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <!-- Примітка: для YouTube шортів (вертикальних відео) потрібно знайти embed-код з правильним співвідношенням сторін -->
                 </div>
             </div>
             <p class="text-gray-500 text-sm mt-8">
@@ -329,9 +339,9 @@
             <div class="flex overflow-x-auto pb-6 space-x-8 team-scroll-container px-4 sm:px-0">
                 <!-- Член команди 1 -->
                 <div class="flex-shrink-0 w-56 bg-gray-800 rounded-xl p-6 shadow-lg text-center border border-gray-700 transform hover:scale-105 transition-transform duration-300">
-                    <img src="https://github.com/volder16/kubaPR/blob/main/img/Vol.webp" alt="Фото члена команди" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-pink-500">
+                    <img src="img/Vol.webp" alt="Фото члена команди" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-pink-500">
                     <h4 class="text-xl font-semibold text-white">Володимир Надточій</h4>
-                    <p class="text-sm text-gray-400">Креативний Директор</p>
+                    <p class="text-sm text-gray-400">Креативний Директор, Голоний монтажер</p>
                 </div>
                 <!-- Член команди 2 -->
                 <div class="flex-shrink-0 w-56 bg-gray-800 rounded-xl p-6 shadow-lg text-center border border-gray-700 transform hover:scale-105 transition-transform duration-300">
@@ -456,7 +466,7 @@
         });
 
         // Обробка відправки форми (для демонстрації)
-        document.querySelector('#briefModal form').addEventListener('submit', function(event) {
+        document.querySelector('#briefModal form').addEventListener('submit', function (event) {
             event.preventDefault(); // Запобігти стандартній відправці форми
             // Тут можна додати логіку для відправки даних на сервер (наприклад, через fetch API)
             console.log('Форма відправлена!');
